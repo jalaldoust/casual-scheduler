@@ -15,9 +15,8 @@ server_debug.log
 *.bak
 *.backup.json
 
-# Local state (optional - you may want to commit data/state.json for your deployment)
-# Uncomment if you don't want to commit state:
-# data/state.json
+# Data files (contains user info, passwords, etc.)
+data/
 
 # Temporary scripts
 fix_railway.py
