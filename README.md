@@ -1,84 +1,59 @@
 # CausalAI HPC Scheduler
 
-A web-based resource allocation system for managing shared high-performance computing infrastructure. Designed for research teams that need fair and transparent access to GPU resources.
+A simple web app for scheduling shared GPU resources using a credit-based bidding system.
 
-Learn more at [casualai.net](https://casualai.net)
+Visit [casualai.net](https://casualai.net)
 
-## Overview
+## What is this?
 
-The CausalAI HPC Scheduler implements a market-based approach to computational resource allocation. Rather than traditional first-come-first-served or manual assignment methods, this system allows researchers to express the relative value of their computational needs through a credit-based bidding mechanism.
+When multiple people share GPUs, someone needs to decide who gets what and when. This system lets users bid credits for GPU time slots. Highest bid wins. Simple.
 
-## How It Works
+## How it works
 
-### Credit-Based Bidding System
+1. Each user gets a budget of credits
+2. Users bid on specific GPU hours they need
+3. At transition time, highest bids win
+4. Winners get their GPU time, losers keep their credits
+5. Unused credits roll over to next period
 
-Each user receives a periodic budget of credits that can be allocated across available GPU time slots. Users bid credits on specific hour-long slots for individual GPUs, with higher bids winning access to the resource. This creates a self-regulating system where users naturally prioritize their most important workloads.
+## Why bidding?
 
-### Resource Allocation Process
-
-1. **Planning Phase**: Users view available time slots in a day-based schedule and place bids using their credit budget. The system supports bulk bidding for efficient allocation of extended computational runs.
-
-2. **Auction Resolution**: At the transition time, the system resolves all bids. For each GPU hour slot, the highest bidder wins access. Credits are only deducted for winning bids.
-
-3. **Execution Phase**: During execution, users can see their allocated resources and monitor real-time GPU utilization. Administrators receive notifications when jobs are not utilizing their allocated resources efficiently.
-
-4. **Credit Management**: Unused credits roll over between periods (at a configurable rate), incentivizing strategic resource planning rather than use-it-or-lose-it behavior.
-
-### Fair Access Mechanisms
-
-- **Outbid Notifications**: Users are alerted when outbid on their planned slots, allowing them to adjust their strategy during the planning phase.
-- **Budget Constraints**: Periodic credit allocation prevents any single user from monopolizing resources long-term.
-- **Price Discovery**: The bidding system reveals the actual demand for resources, helping both users and administrators make informed decisions.
-- **Historical Tracking**: Complete bid and allocation history enables analysis of resource usage patterns and needs.
+- Users prioritize what matters most to them
+- No manual coordination needed
+- Fair: everyone gets the same budget
+- Transparent: you see what others are bidding
 
 ## Features
 
-### For Users
-- Interactive day-based scheduling interface with 24-hour visibility
-- Real-time bid status updates and outbid notifications
-- Bulk bidding for multi-hour GPU reservations
-- Personal credit balance and allocation tracking
-- Historical view of past bids and resource usage
-- Undo functionality for quick bid corrections
+- Day-based schedule with 24-hour slots
+- Bulk bidding for long jobs
+- Real-time notifications when outbid
+- Historical view of past allocations
+- Admin tools for managing users and credits
 
-### For Administrators
-- User and credit management interface
-- Real-time GPU monitoring with utilization alerts
-- System-wide resource allocation overview
-- Configurable budget parameters and rollover rates
-- Audit trail of all bidding activity
+## Tech
 
-## System Architecture
+- Python 3.11+ (no dependencies)
+- Vanilla JavaScript
+- JSON storage
+- Runs on port 5000
 
-The scheduler is built as a lightweight, self-contained web application:
-
-- **Backend**: Python 3.11+ with no external dependencies beyond the standard library
-- **Frontend**: Vanilla JavaScript with responsive CSS
-- **Storage**: JSON-based persistence for simplicity and transparency
-- **Authentication**: Session-based with bcrypt password hashing
-
-This architecture prioritizes reliability, maintainability, and ease of deployment in research computing environments.
-
-## Deployment
-
-The application can be deployed on any platform supporting Python web services:
+## Deploy
 
 ```bash
 python app.py
 ```
 
-The server runs on port 5000 by default and serves both the web interface and REST API.
+That's it.
 
 ## Configuration
 
-Key system parameters are configurable through the admin interface or directly in the state file:
+Edit via admin panel or directly in `data/state.json`:
+- Credit budgets
+- Rollover rates
+- Transition times
+- Number of GPUs
 
-- Credit budget per period
-- Credit rollover percentage
-- Day transition time
-- Number of available GPUs
-- User accounts and roles
+---
 
-## About
-
-This system is developed and maintained by the CausalAI research group to support fair allocation of computational resources across research projects. For more information about our research and infrastructure, visit [casualai.net](https://casualai.net).
+Developed by CausalAI research group.
