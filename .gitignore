@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.Python
+
+# Logs
+*.log
+live.log
+server.log
+server_debug.log
+
+# Backups
+*.bak
+*.backup.json
+
+# Local state (optional - you may want to commit data/state.json for your deployment)
+# Uncomment if you don't want to commit state:
+# data/state.json
+
+# Temporary scripts
+fix_railway.py
+force_populate_current_week.py
+populate_bids.py
+populate_current_week.py
+reset_state.py
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,2 @@
+# No external dependencies required
+# This app uses only Python 3.11+ standard library

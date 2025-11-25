@@ -1,0 +1,28 @@
+# Logs
+*.log
+live.log
+server.log
+server_debug.log
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Backup files
+*.bak
+*.backup
+
+# Local data (will be fresh on deployment)
+data/state.json
+data/state.backup.json
+
+# Development files
+.DS_Store
+.env.local
+.claude/
+
+# Test/utility scripts
+fix_railway.py
+populate_*.py
+reset_state.py
